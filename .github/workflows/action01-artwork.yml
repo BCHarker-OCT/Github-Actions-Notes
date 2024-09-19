@@ -24,3 +24,6 @@ jobs:
 
       - name: List Files 
         run: ls -altr
+
+      - name: Echo hello
+        run: echo hello
