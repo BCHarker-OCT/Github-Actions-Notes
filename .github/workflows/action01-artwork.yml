@@ -1,0 +1,26 @@
+name: Generate ASCII Art
+
+on: push 
+
+jobs: 
+  first_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+  
+
+      - name: Install Cowsay 
+        run: sudo apt install cowsay -y 
+
+      - name: Execute Cowsay 
+        run: cowsay -f dragon "Grr! Dragon GRR" >> dragon.txt 
+
+      - name: Test that the file exists 
+        run: grep -i "dragon" dragon.txt 
+
+      - name: Read file 
+        run: cat dragon.txt 
+
+      - name: List Files 
+        run: ls -altr
