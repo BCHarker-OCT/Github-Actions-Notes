@@ -1,5 +1,5 @@
 name: Timeouts 10 
-on: workflow_dispath 
+on: workflow_dispatch
 
 env:
     SIMPLE_VAR: simple_value
