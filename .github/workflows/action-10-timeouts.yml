@@ -1,0 +1,30 @@
+name: Timeouts 10 
+on: workflow_dispath 
+
+env:
+    SIMPLE_VAR: simple_value
+    ANOTHER_VAR: another_value 
+
+
+jobs: 
+    docker_build: 
+        runs-on: ubuntu-latest 
+        concurrency: 
+            group: build 
+        steps: 
+        - name: Docker Build 
+          run: echo docker build -t ${{ env.SIMPLE_VAR }} ${{ env.ANOTHER_VAR }}
+
+    docker_deploy:
+        # Job level timeout 
+        timeout-minutes: 1 # applicable for all steps 
+        needs: docker_build
+        runs-on: ubuntu-latest
+        concurrency:
+            group: deploy
+        steps: 
+        - name: Docker Deploy
+          timeout-minutes: 1
+          run: |
+             echo docker run -d  ${{ env.SIMPLE_VAR }} ${{ env.ANOTHER_VAR }}         
+             sleep 9000

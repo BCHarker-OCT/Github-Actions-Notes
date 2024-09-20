@@ -29,6 +29,58 @@ Use the `needs` keyword on a job to specify that it requires another job to comp
 Artifacts are stored for 90 days by default. Can be changed in GitHub if more is needed. 
 500mb in free accounts maximum artifact size. 
 
+## Using Concurrency 
+
+- [Github Concurrency Documentation](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs)
+
+We can enable at the workflow level or the job level. 
+
+```
+concurrency: 
+  group: production-deployment 
+  cancel-in-progress: true
+
+```
+
+`cancel-in-progress` will cancel any other running action so the workflow will be run. 
+
+If the cancel is set to false or not setup otherwise, then it will wait until the first action's step is completed before moving onto the next step. 
+
+## 🕰️ Timeouts 
+GitHub actions will automatically timeout at 6 hours. 
+
+We can specify timeouts at the step or job level.
+
+A job-level timeout in a GitHub Action sets a limit for the entire job, not for each individual step. This means that the total execution time of all steps combined within that job cannot exceed the specified timeout. If the job exceeds this limit, GitHub will automatically cancel it12.
+
+```yaml
+# Timeouts Example
+jobs: 
+    docker_build: 
+        runs-on: ubuntu-latest 
+        concurrency: 
+            group: build 
+        steps: 
+        - name: Docker Build 
+          run: echo docker build -t ${{ env.SIMPLE_VAR }} ${{ env.ANOTHER_VAR }}
+
+    docker_deploy:
+        # Job level timeout 
+        # timeout-minutes: 1 
+        needs: docker_build
+        runs-on: ubuntu-latest
+        concurrency:
+            group: deploy
+        steps: 
+        - name: Docker Deploy
+          timeout-minutes: 1
+          run: |
+             echo docker run -d  ${{ env.SIMPLE_VAR }} ${{ env.ANOTHER_VAR }}         
+             sleep 9000
+```
+
+
+
 ## Environment Variable Storage 
 
 Env vars can be stored at the: 
@@ -51,7 +103,7 @@ You can access secrets and variables with the follow syntax in the workflow:
 ${{ secrets.MY_REPO_SECRET }}
 
 # VARIABLES: 
-$${{ vars.DOCKER_USERNAME }}
+${{ vars.DOCKER_USERNAME }}
 ```
 
 ## Example GitHub Actions
