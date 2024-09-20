@@ -1,4 +1,4 @@
-name: Generate ASCII Art
+name: Generate ASCII Art Multi-Job
 
 on: push 
 
@@ -30,9 +30,7 @@ jobs:
       uses: actions/download-artifact@v4.1.8
       with:
         name: dragon-text-file
-        path: dragon.txt 
   
-
     - name: Test that a file exists 
       run: grep -i "dragon" dragon.txt 
       
@@ -44,7 +42,6 @@ jobs:
       uses: actions/download-artifact@v4.1.8
       with:
         name: dragon-text-file
-        path: dragon.txt 
 
     - name: Read File 
       run: cat dragon.txt 
