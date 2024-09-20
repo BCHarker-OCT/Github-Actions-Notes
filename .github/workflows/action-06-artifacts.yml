@@ -1,0 +1,53 @@
+name: Generate ASCII Art
+
+on: push 
+
+jobs: 
+
+# Runs on 1 machine 
+  build_job: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Cowsay 
+      run: sudo apt install cowsay -y 
+      
+    - name: Execute Cowsay CMD
+      run: cowsay -f dragon "I am a dragon go away!" >> dragon.txt 
+      
+    - name: Upload Dragon Artifact 
+      uses: actions/upload-artifact@v4.4.0
+      with: 
+        name: dragon-text-file
+        path: dragon.txt
+  
+
+# Runs on a second runner also running Ubuntu 
+  test_job_2:
+    needs: build_job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: dragon-text-file
+        path: dragon.txt 
+  
+
+    - name: Test that a file exists 
+      run: grep -i "dragon" dragon.txt 
+      
+  deploy_job_3: 
+    needs: [build_job, test_job_2]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: dragon-text-file
+        path: dragon.txt 
+
+    - name: Read File 
+      run: cat dragon.txt 
+
+    - name: Deploy 
+      run: echo Deploying... ... ...
