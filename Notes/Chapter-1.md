@@ -6,6 +6,13 @@
   - See the marketplace here [https://github.com/marketplace](https://github.com/marketplace)
   - We might use the `checkout` action to checkout code from the repo automatically. 
   
+## Event Workflow Triggers   
+
+- [GitHub Documentation](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
+
+- schedule (cron syntax) 
+- workflow_dispath (manual run job)
+  
 
 ## Jobs 
 
@@ -38,6 +45,14 @@ Using the `env` vars in an action can be done using: `$ENV_VAR_NAME` or `${{ env
 - Repository Level 
 - Environment Level 
 
+You can access secrets and variables with the follow syntax in the workflow:
+```
+#SECRETS:
+${{ secrets.MY_REPO_SECRET }}
+
+# VARIABLES: 
+$${{ vars.DOCKER_USERNAME }}
+```
 
 ## Example GitHub Actions
 -  [Chapter-1-Examples](../Chapter-1-Examples)

@@ -1,0 +1,16 @@
+name: Scheduled Jobs 
+on:
+    workflow_dispatch
+    # If I wanted to use cron i would disable the following 2 lines and comment above.
+    # schedule:
+    #   - cron: "*/1 * * * *"
+    
+env: 
+    MY_VAR: value
+
+jobs: 
+    new_job: 
+      runs-on: ubuntu-latest
+      steps:
+      - name: echo the var
+        run: echo ${{ env.MY_VAR}} && echo $MY_VAR
