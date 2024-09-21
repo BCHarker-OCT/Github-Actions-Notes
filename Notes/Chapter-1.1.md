@@ -1,6 +1,6 @@
 # Chapter 1.1 GitHub Actions Learning Continued 
 
-## Matrix Strategies 
+## Matrix Strategies (Example #11)
 
 Use a variable to allow running a job on multiple oses 
 
@@ -13,12 +13,12 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 ```
 
-The keys under Matrix are use created. Refer to them with `${{ matrix.version }}`.
+The keys under Matrix are user created. Refer to them with `${{ matrix.version }}`.
 
 - `fail-fast`: Default behavior is any step in the matrix fails, then all other runs in the matrix fail.Change this by setting `fail-fast` to false in the strategy. 
 - `max-parallel`: Sets the maximum jobs to process at a time
 
-### Include/Exclude for Part of the Matrix 
+### Include/Exclude for Part of the Matrix (Example #11)
 
 ```yaml
     deploy:
@@ -40,7 +40,7 @@ The keys under Matrix are use created. Refer to them with `${{ matrix.version }}
 
 > Contexts are a way to access information about workflow runs, variables, runner environments, jobs, and steps. Each context is an object that contains properties, which can be strings or other objects. 
 
-## [Expressions](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions)
+## [Expressions](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions) (Example #13)
 
 > You can use expressions to programmatically set environment variables in workflow files and access contexts. An expression can be any combination of literal values, references to a context, or functions. You can combine literals, context references, and functions using operators. For more information about contexts, see "Accessing contextual information about workflow runs."
 
@@ -76,7 +76,7 @@ ACTIONS_STEP_DEBUG to true //step debug
 
 You can also enable the logs when running the action manually with the workflow_dispatch button. 
 
-## [Workflow Logs via RestAPI](https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28)
+## [Workflow Logs via RestAPI](https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28) (No example workflow)
 
 Use this to download the logs programmatically. 
 We can: 
@@ -95,6 +95,9 @@ curl -L \
   https://api.github.com/repos/OWNER/REPO/actions/workflows
 ```
 
-## [Workflow Dispatch Inputs](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#onworkflow_dispatch)
+## [Workflow Dispatch Inputs](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#onworkflow_dispatch) (Example #15) 
 
 10 Inputs Maximum for a Workflow! 
+
+You can setup environments at the GitHub repo level in the GUI. You can attach variables to the environment. This is a pretty cool way to add additional info to your workflow to lessen variables you need to have the user select. 
+

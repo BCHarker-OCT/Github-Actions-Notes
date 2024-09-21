@@ -37,9 +37,15 @@ jobs:
                 echo "Run tests: ${{ inputs.run-tests }}" 
                 echo "Test type: ${{ inputs.test-type }}"
                 echo "Environment: ${{ inputs.environment }}"
+                echo "AWS Account Number (from environment var): ${{ vars.AWS_ACCOUNT_NUMBER }}"
                 echo "Build: ${{ inputs.build-number }}"
                 echo "Message: ${{ inputs.message }}"
-                
+            
+            # Compariong a boolean to a string will give FALSE in the below example!     
+            # - name: Run tests (if selected)
+            #   if: ${{ inputs.run-tests == 'true' }}
+            #   run: echo "Testing..........."
+
             - name: Run tests (if selected)
-              if: ${{ inputs.run-tests == 'true' }}
-              run: echo "Testing..........."
+              if: ${{ inputs.run-tests == true }}
+              run: echo "Testing..........."  
