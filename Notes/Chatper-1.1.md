@@ -44,3 +44,36 @@ The keys under Matrix are use created. Refer to them with `${{ matrix.version }}
 
 > You can use expressions to programmatically set environment variables in workflow files and access contexts. An expression can be any combination of literal values, references to a context, or functions. You can combine literals, context references, and functions using operators. For more information about contexts, see "Accessing contextual information about workflow runs."
 
+## [Workflow Event Filters and Activity Types](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
+
+> Workflow triggers are events that cause a workflow to run. For more information about how to use workflow triggers, see "Triggering a workflow."
+
+> Some events have multiple activity types. For these events, you can specify which activity types will trigger a workflow run. For more information about what each activity type means, see "Webhook events and payloads."
+
+## [Skipping workflow runs](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/skipping-workflow-runs)
+
+> You can skip workflow runs triggered by the push and pull_request events by including a command in your commit message.
+
+Commands that can be added to a commit message to skip GH Action:
+```
+[skip ci]
+[ci skip]
+[no ci]
+[skip actions]
+[actions skip]
+```
+
+## [Debug Logging](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging)
+
+> If the workflow logs do not provide enough detail to diagnose why a workflow, job, or step is not working as expected, you can enable additional debug logging.
+
+How to enable it? Set the secret variable for the repo. Can add as variables or as secrets. Secrets has precedence over variables. 
+```
+# SET 
+ACTIONS_RUNNER_DEBUG to true //runner debug 
+ACTIONS_STEP_DEBUG to true //step debug
+```
+
+You can also enable the logs when running the action manually with the workflow_dispatch button. 
+
+

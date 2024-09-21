@@ -1,6 +1,6 @@
 name: Generate ASCII Art Multi-Job 06
 
-on: push 
+on: workflow_dispatch
 
 jobs: 
 
