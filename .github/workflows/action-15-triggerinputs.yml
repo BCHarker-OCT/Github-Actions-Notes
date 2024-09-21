@@ -31,7 +31,7 @@ jobs:
     build-and-debug:
         runs-on: ubuntu-latest
         steps:
-            # Get inputs fro dispatch
+            # Get inputs for dispatch
             - name: Print workflow inputs
               run: |
                 echo "Run tests: ${{ inputs.run-tests }}" 
@@ -41,10 +41,11 @@ jobs:
                 echo "2. AWS Account Number (from environment var): ${{ env.AWS_ACCOUNT_NUMBER }}"
                 echo "3. AWS Account Number (from environment var): ${{ secrets.AWS_ACCOUNT_NUMBER }}"
                 echo "4. AWS Account Number (from environment var): ${{ inputs.environment.vars.AWS_ACCOUNT_NUMBER }}"
+                echo "5. AWS Account Number (from environment var): ${{ inputs.environment.env.AWS_ACCOUNT_NUMBER }}"
                 echo "Build: ${{ inputs.build-number }}"
                 echo "Message: ${{ inputs.message }}"
             
-            # Compariong a boolean to a string will give FALSE in the below example!     
+            # Comparing a boolean to a string will give FALSE in the below example!     
             # - name: Run tests (if selected)
             #   if: ${{ inputs.run-tests == 'true' }}
             #   run: echo "Testing..........."
