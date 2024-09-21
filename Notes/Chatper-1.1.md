@@ -25,7 +25,7 @@ The keys under Matrix are use created. Refer to them with `${{ matrix.version }}
         strategy: 
             matrix: 
               os: [ubuntu-latest, ubuntu-20.04, windows-latest]
-              images: [hellow-world, alpine]
+              images: [hello-world, alpine]
               # Exclude alpine image from windows 
               exclude: 
                 - images: alpine 
@@ -39,4 +39,8 @@ The keys under Matrix are use created. Refer to them with `${{ matrix.version }}
 ## [Contexts](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs) 
 
 > Contexts are a way to access information about workflow runs, variables, runner environments, jobs, and steps. Each context is an object that contains properties, which can be strings or other objects. 
+
+## [Expressions](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions)
+
+> You can use expressions to programmatically set environment variables in workflow files and access contexts. An expression can be any combination of literal values, references to a context, or functions. You can combine literals, context references, and functions using operators. For more information about contexts, see "Accessing contextual information about workflow runs."
 

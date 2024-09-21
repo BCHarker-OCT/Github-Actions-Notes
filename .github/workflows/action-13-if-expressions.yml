@@ -1,0 +1,27 @@
+name: 12-If Expressions
+on: workflow_dispatch 
+env: 
+    CONTAINER_REGISTRY: docker.io
+    DOCKER_USERNAME: bchark-oct
+    IMAGE_NAME: github-actions-image 
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Build 
+      run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+    - name: Docker Login 
+      env: 
+        DOCKER_PASSWORD: MYS3cureP@ssw0rd
+      run: echo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+    - name: Docker Publish
+      run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
+  deploy:
+    ## Conditional only works if we're on the main branch
+    if: github.ref == 'ref/heads/main'
+    needs: docker 
+    runs-on: ubuntu-latest 
+    steps: 
+    - name: Docker Run 
+      run: echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
