@@ -26,5 +26,5 @@ jobs:
         - name: Docker Deploy
           timeout-minutes: 1
           run: |
-             echo docker run -d  ${{ env.SIMPLE_VAR }} ${{ env.ANOTHER_VAR }}         
+             echo docker run -d  ${{ env.SIMPLE_VAR }} ${{ env.ANOTHER_VAR }}     
              sleep 9000
