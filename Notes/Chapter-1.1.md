@@ -76,4 +76,25 @@ ACTIONS_STEP_DEBUG to true //step debug
 
 You can also enable the logs when running the action manually with the workflow_dispatch button. 
 
+## [Workflow Logs via RestAPI](https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28)
 
+Use this to download the logs programmatically. 
+We can: 
+- List workflows 
+- Get a workflow 
+- Disable/Enable a workflow
+- Create a workflow dispatch 
+- Get workflow usage 
+- Get workflow logs
+
+```bash
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer <YOUR-TOKEN>" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/OWNER/REPO/actions/workflows
+```
+
+## [Workflow Dispatch Inputs](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#onworkflow_dispatch)
+
+10 Inputs Maximum for a Workflow! 

@@ -1,0 +1,45 @@
+# See notes Chatper-1.1.md 
+name: 15-TriggerInputs
+
+on:
+    workflow_dispatch:
+      inputs:
+        run-tests:
+          description: "Run tests?"
+          type: boolean
+          required: true
+        test-type:
+          description: "Type of tests to run"
+          type: choice
+          options:
+            - unit
+            - integration
+            - all
+        environment: 
+            description: "Environment to run in"
+            type: environment
+            required: true
+        build-number:
+            description: "Custom build number"
+            type: number
+            required: false
+        message:
+            description: "Additional message"
+            type: string
+            required: false 
+jobs:
+    build-and-debug:
+        runs-on: ubuntu-latest
+        steps:
+            # Get inputs fro dispatch
+            - name: Print workflow inputs
+              run: |
+                echo "Run tests: ${{ inputs.run-tests }}" 
+                echo "Test type: ${{ inputs.test-type }}"
+                echo "Environment: ${{ inputs.environment }}"
+                echo "Build: ${{ inputs.build-number }}"
+                echo "Message: ${{ inputs.message }}"
+                
+            - name: Run tests (if selected)
+              if: ${{ inputs.run-tests == 'true' }}
+              run: echo "Testing..........."

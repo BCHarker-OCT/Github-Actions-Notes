@@ -5,5 +5,5 @@ You can find some Github actions in the .github/workflows folder as well as note
 ## 📙 Notes 
 
 - [Chapter 1 - Core Concepts](./Notes/Chapter-1.md)
-- [Chapter 1.1 - Core Concepts](./Notes/Chatper-1.1.md)
+- [Chapter 1.1 - Core Concepts](./Notes/Chapter-1.1.md)
 - 
