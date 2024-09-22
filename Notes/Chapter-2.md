@@ -135,7 +135,7 @@ Services run onto of the job-level containers. They cannot be run outside of a j
 
 > You can use service containers to connect databases, web services, memory caches, and other tools to your workflow.
 
-Example fro GitHub Documentation:
+Example from GitHub Documentation:
 ```yaml
 name: Redis container example
 on: push
@@ -154,5 +154,4 @@ jobs:
       redis:
         # Docker Hub image
         image: redis
-
 ```
