@@ -28,6 +28,8 @@ on:
             type: string
             required: false 
 jobs:
+    env:
+        theaccount: ${{ inputs.environment.vars.AWS_ACCOUNT_NUMBER }}
     build-and-debug:
         runs-on: ubuntu-latest
         steps:
@@ -43,6 +45,7 @@ jobs:
                 echo "4. AWS Account Number (from environment var): ${{ inputs.environment.vars.AWS_ACCOUNT_NUMBER }}"
                 echo "5. AWS Account Number (from environment var): ${{ inputs.environment.env.AWS_ACCOUNT_NUMBER }}"
                 echo "6. AWS Account Number (from environment var): ${{ inputs.environment.AWS_ACCOUNT_NUMBER }}"
+                echo "EOD1 AWS Account Number (from environment var): ${{ env.theaccount}}"
                 echo "Build: ${{ inputs.build-number }}"
                 echo "Message: ${{ inputs.message }}"
             
