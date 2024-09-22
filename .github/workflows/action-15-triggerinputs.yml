@@ -28,10 +28,10 @@ on:
             type: string
             required: false 
 jobs:
-    env:
-        theaccount: ${{ inputs.environment.vars.AWS_ACCOUNT_NUMBER }}
     build-and-debug:
         runs-on: ubuntu-latest
+        env:
+          theaccount: ${{ inputs.environment.vars.AWS_ACCOUNT_NUMBER }}
         steps:
             # Get inputs for dispatch
             - name: Print workflow inputs
