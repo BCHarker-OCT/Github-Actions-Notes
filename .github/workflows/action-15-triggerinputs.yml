@@ -28,7 +28,6 @@ on:
             type: string
             required: false 
 jobs:
-    environment: ${{ github.event.inputs.environment }} 
     build-and-debug:
         runs-on: ubuntu-latest
         steps:

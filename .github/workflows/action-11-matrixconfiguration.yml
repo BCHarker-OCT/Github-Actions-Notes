@@ -1,4 +1,4 @@
-name: Matrix Configuration 11 
+name: 11-Matrix Configuration
 
 on: workflow_dispatch
 

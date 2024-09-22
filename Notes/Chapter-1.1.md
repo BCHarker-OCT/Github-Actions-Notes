@@ -101,3 +101,39 @@ curl -L \
 
 You can setup environments at the GitHub repo level in the GUI. You can attach variables to the environment. This is a pretty cool way to add additional info to your workflow to lessen variables you need to have the user select. 
 
+[Cheating the System more than 10 inputs](https://medium.com/@hemantbhosale916/github-actions-alternative-to-define-more-than-10-inputs-for-workflow-dispatch-event-d4d327d2680b)
+
+🤔 Unsolved Mystery: How do I access variable and secrets from a repository environment? Nothing I tried so far works. 
+
+## Triggers Events with Webhooks 
+
+Manual Dispatch: 
+- `workflow_dispatch` --> Click a button 
+- `repository_dispatch` --> Send HTTPs request with payload 
+
+**Repository Dispatch Example**
+```
+on: 
+  repository_dispatch:
+    types: [system_result]
+```
+
+Automated Dispatch: 
+- `workflow_run` --> Reusable workflows, cleaner modular workflows 
+- `workflow_call` --> chain reaction workflows, if one workflow runs, then trigger the next one 
+
+You can use if statements to not run if the workflow failed: 
+
+```
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success'}}
+    steps:
+      -run: echo "Run deploy steps..."
+  on-fail:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure'}}
+    steps:
+      -run: echo "Previous workflow failed"      
+```
