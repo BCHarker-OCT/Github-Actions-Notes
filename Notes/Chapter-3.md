@@ -113,4 +113,27 @@ Delineating between `env` and `environment`:
 - `env` used for Environment variables
 - `environment` used for Github Repo Environments
 
+**Example:**
+```yamlß
+name: Pulling Variables from Environments
+
+on:
+    workflow_dispatch:
+      inputs:
+        environment: 
+            description: "Environment to run in"
+            type: environment
+            required: true   
+jobs:
+    build-and-debug:
+        environment: 
+          name: ${{ inputs.environment }}
+        runs-on: ubuntu-latest
+        steps:
+            # Get inputs for dispatch
+            - name: Print workflow inputs and env var set in repo
+              run: |
+                echo "Environment: ${{ inputs.environment }}"
+                echo "1. AWS Account Number (from environment var): ${{ vars.AWS_ACCOUNT_NUMBER }}"
+```
 
