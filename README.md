@@ -1,4 +1,4 @@
-# GitHub Actions 
+# ⚙️ GitHub Actions 
 
 You can find some Github actions in the .github/workflows folder as well as notes below. 
 
