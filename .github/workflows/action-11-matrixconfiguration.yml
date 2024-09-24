@@ -4,11 +4,11 @@ on: workflow_dispatch
 
 jobs:
     deploy:        
-        runs-on: ${{ matrix.os }}
         strategy: 
               matrix:
                 images: [amd64/alpine, alpine]
                 os: [ubuntu-latest] 
+        runs-on: ${{ matrix.os }}        
         steps:
         - name: Echo docker details 
           run: docker info 

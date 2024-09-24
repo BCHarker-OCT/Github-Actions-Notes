@@ -49,3 +49,4 @@ This can be helpful when the called workflow has data the caller workflow needs.
 
 Workflow Templates can be defined at an Organizational level allowing anyone with access to setup and use the actions. 
 
+Take a look at [Ice Bear Institute's Organizational Workflows](https://github.com/Ice-Bear-Institute/.github)

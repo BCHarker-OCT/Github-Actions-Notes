@@ -52,7 +52,11 @@ You can find some Github actions in the .github/workflows folder as well as note
   - [Passing values between steps and jobs in a workflow](docs.github.com/en/actions/learn-github-actions/variables#passing-values-between-steps-and-jobs-in-a-workflow)
   - Understanding GitHub Environments 
 - [Chapter 4 - Reusable Actions](./Notes/Chapter-4.md)
-
+  - [Reusing workflows](https://docs.github.com/en/actions/sharing-automations/reusing-workflows)
+  - [Sharing actions in a private repo](https://docs.github.com/en/actions/sharing-automations/sharing-actions-and-workflows-from-your-private-repository)
+  - Secrets in Reusable Workflows 
+  - [Using Outputs from a Reusable Workflow](https://docs.github.com/en/actions/sharing-automations/reusing-workflows#using-outputs-from-a-reusable-workflow)
+  - [Starter Workflows](https://docs.github.com/en/actions/sharing-automations/creating-workflow-templates-for-your-organization)
 
 
 ## Retrieve Chapter Concepts from Markdown Files 
