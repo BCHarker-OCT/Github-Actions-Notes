@@ -9,9 +9,11 @@ You can find some Github actions in the .github/workflows folder as well as note
   - Because GH actions can turn into very large files it would be helpful to make sure folding is enabled in your IDE. 
 ![how to enable folding in vscode](./Media/Folding.png "Folding in VScode")  
 - [Keyboard shortcuts related to Folding in VSCode](https://stackoverflow.com/questions/30067767/how-do-i-fold-collapse-hide-sections-of-code-in-visual-studio-code)
-- [GitHub Actions VSCode Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions)
+- [🔌 GitHub Actions VSCode Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions)
   - Bring up a terminal in your VSCode editor to see the `Problems` tab to view detected issues in your Workflows.
   - The built-in Actions runner/viewer is not very good. 
+- [Actions Cheatsheet](https://github.github.io/actions-cheat-sheet/actions-cheat-sheet.pdf)
+- [ 🛍️ GitHub Actions Marketplace](https://github.com/marketplace?type=actions)
 
 ## 📙 Notes 
 
@@ -49,6 +51,7 @@ You can find some Github actions in the .github/workflows folder as well as note
   - [Setting an Environment Variable](docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable)
   - [Passing values between steps and jobs in a workflow](docs.github.com/en/actions/learn-github-actions/variables#passing-values-between-steps-and-jobs-in-a-workflow)
   - Understanding GitHub Environments 
+- [Chapter 4 - Reusable Actions](./Notes/Chapter-4.md)
 
 
 

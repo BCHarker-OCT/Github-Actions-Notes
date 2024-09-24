@@ -2,14 +2,39 @@ name: Deployment - Reusable workflow
 
 on:
   workflow_call:
+    inputs:
+      mongodb-uri:
+        required: true 
+        type: string
+      kubectl-version: 
+        description: Provide k8s version 
+        default: v1.27.0
+        required: false
+        type: string 
+      k8s-manifest-dir:
+        description: Dir with K8s Manifests 
+        defaults: kubernetes/
+      environment:
+        description: Environment to use 
+        type: string
+        required: true 
+    secrets:
+      k8s-kubeconfig: 
+        required: true 
+      mongodb-password:
+        required: true
+    outputs: 
+      application-url: 
+        value: ${{ jobs.reuse-deploy.outputs.APP_INGRESS_URL }}
 
 jobs:
   reuse-deploy:  
-   environment:
-      name: development 
-      url: https://${{ steps.set-ingress-host-address.outputs.APP_INGRESS_HOST }}
-   outputs: 
-      APP_INGRESS_URL: ${{ steps.set-ingress-host-address.outputs.APP_INGRESS_HOST}}
+      environment:
+        name: ${{ inputs.environment }}
+        url: https://${{ steps.set-ingress-host-address.outputs.APP_INGRESS_HOST }}
+      outputs: 
+        APP_INGRESS_URL: ${{ steps.set-ingress-host-address.outputs.APP_INGRESS_HOST}}
+      runs-on: ubuntu-latest
       steps:
       - name: Checkout Repo 
         uses: actions/checkout@v4
@@ -17,31 +42,30 @@ jobs:
       - name: Install kubectl CLI
         uses: azure/setup-kubectl@v3 
         with:
-          version: 'v1.26.0'
+          version: '${{ inputs.kubectl-version }}'
 
       - name: Set Kubeconfig 
         uses: azure/k8s-set-context@v3 
         with: 
           method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}    
+          kubeconfig: ${{ secrets.k8s-kubeconfig }}    
 
       - name: Fetch Kubernetes Cluster Details
         run: | 
           kubectl version --short 
           echo ----------------------------
           kubectl get nodes 
-     
+      
       - name: Save Nginx Ingress Controller IP as a GH Env VAR 
         run: |
           echo "INGRESS_IP=$(kubectl -n ingress-nginx get services ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")" >> $GITHUB_ENV
-
 
       - name: Replace Token in Manifest Files 
         uses: cshleiden/replace-tokens@v1.3
         with:
           tokenPrefix: '_{_'
           tokenSuffix: '_}_'
-          files: '["kubernetes/development/*.yaml"]'
+          files: '["${{ inputs.k8s-manifest-dir }}*.yaml"]'
         env:
           NAMESPACE: ${{ vars.NAMESPACE }}
           REPLICAS: ${{ vars.REPLICAS }}
@@ -51,18 +75,18 @@ jobs:
       - name: Create MongoDB Secret 
         run: | 
           kubectl -n ${{ vars.NAMESPACE }} create secret generic mongo-db-creds \
-          --from-literal=MONGO_URI=${{ env.MONGO_URI }} \
+          --from-literal=MONGO_URI=${{ inputs.mongodb-uri }} \
           --from-literal=MONGO_USERNAME:${{ env.MONGO_USERNAME }} \
-          --from-literal=MONGO_PASSWORD:${{ secrets.MONGO_PASSWORD }} \
+          --from-literal=mongodb-password:${{ secrets.mongodb-password }} \
           --save-config \
           --dry-run=client \
           -o yaml | kubectl apply -f -
 
       - name: Check Files
         run: | 
-          cat kubernetes/development/*.yaml
+          cat ${{ inputs.k8s-manifest-dir }}*.yaml
 
-      - name: Deploy to Dev Env 
+      - name: Deploy to ${{ inputs.environment }}
         run: | 
           kubectl apply -f kubernetes/development
 
