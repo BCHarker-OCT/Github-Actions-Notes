@@ -2,7 +2,7 @@
 
 You can find some Github actions in the .github/workflows folder as well as notes below. 
 
-## Verful Helpful Tips 
+##  Helpful Tips 
 
 - [One of several helpful GH Actions tutorials](https://www.youtube.com/watch?v=5xngh29yx9A)
 - [VSCode folding](https://www.youtube.com/watch?v=63Ck0LTzaps)
@@ -27,7 +27,7 @@ You can find some Github actions in the .github/workflows folder as well as note
   - Repository Level Secrets/Variables 
   - Example GitHub Actions
 - [Chapter 1.1 - Core Concepts](./Notes/Chapter-1.1.md)
-  - Matrix Strategies (Example #11)
+  - [Matrix Strategies (Example #11)](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/running-variations-of-jobs-in-a-workflow)
   - [Contexts](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs) 
   - [Expressions](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions) (Example #13)
   - [Workflow Event Filters and Activity Types](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
@@ -46,7 +46,7 @@ You can find some Github actions in the .github/workflows folder as well as note
   - [Service Containers](https://docs.github.com/en/actions/use-cases-and-examples/using-containerized-services/about-service-containers)
 - [Chapter 3 - Kubernetes Based Deploy Concepts](./Notes/Chapter-3.md)
 - Adding a `KUBECONFIG` file to your action
--# Using the `KUBECONFIG` file and setting context 
+  - Using the `KUBECONFIG` file and setting context 
   - Kubernetes Placeholders 
   - [Setting an Environment Variable](docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable)
   - [Passing values between steps and jobs in a workflow](docs.github.com/en/actions/learn-github-actions/variables#passing-values-between-steps-and-jobs-in-a-workflow)
