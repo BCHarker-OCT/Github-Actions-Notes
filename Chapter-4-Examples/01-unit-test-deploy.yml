@@ -107,6 +107,41 @@ jobs:
           path: coverage 
           retention-days: 5
 
+  reports-s3:
+    needs: [code-coverage, unit-testing]
+    name: AWS S3 - Upload Reports 
+    runs-on: ubuntu-latest 
+    continue-on-error: true 
+    steps:
+      - name: Download Mocha Test Artifact 
+        uses: actions/download-artifact@v3 
+
+      - name: Download Code Coverage Artifact 
+        uses: actions/download-articat@v3 
+        with:
+          name: Code-Coverage-Result
+
+      - name: Merge Test Files 
+        run: | 
+          ls -ltr 
+          mkdir reports-${{ git.sha }}
+          mv cobertura-coverage.xml reports-${{ githb.sha }}/
+          mv test-results.xml reports-${{ githb.sha }}/
+          ls -ltr reports-${{ githb.sha }}/
+
+      - name: Upload to AWS S3
+        uses: Jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env :
+          AWS_S3_BUCKET: solar-system-reports-bucket
+          AWS_ACCESS_KEY _ID: #i secrets-AWS ACCESS KEY IDE
+          AWS _SECRET_ACCESS_KEY: Stin secrets AWS SECRET ACCESS KEYIN
+          AWS REGION: 'us-east-1'
+          SOURCE_DIR: 'reports-${{ github. sha }}'
+          DEST_DIR: 'reports-${{ github. sha })'
+        
+
   docker:
       name: Containerization
       needs: [unit-testing, code-coverage]
