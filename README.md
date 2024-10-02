@@ -57,6 +57,8 @@ You can find some Github actions in the .github/workflows folder as well as note
   - Secrets in Reusable Workflows 
   - [Using Outputs from a Reusable Workflow](https://docs.github.com/en/actions/sharing-automations/reusing-workflows#using-outputs-from-a-reusable-workflow)
   - [Starter Workflows](https://docs.github.com/en/actions/sharing-automations/creating-workflow-templates-for-your-organization)
+- [Chapter 5 - Custom Actions](./Notes/Chapter-5.md)
+
 
 
 ## Retrieve Chapter Concepts from Markdown Files 

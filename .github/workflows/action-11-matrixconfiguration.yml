@@ -7,7 +7,7 @@ jobs:
         strategy: 
               matrix:
                 images: [amd64/alpine, alpine]
-                os: [ubuntu-latest] 
+                os: [ubuntu-latest, macos-latest] 
         runs-on: ${{ matrix.os }}        
         steps:
         - name: Echo docker details 
