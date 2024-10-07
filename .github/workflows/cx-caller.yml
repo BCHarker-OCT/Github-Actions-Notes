@@ -9,7 +9,7 @@ jobs:
   call_workflow:
     uses: ./.github/workflows/api-secret-test.yml
     with:
-      cx_version_benchmark_url: 'https://example.com/benchmark'
+      cx_version_benchmark_url: 'https://httpdump.app/dumps/4172b9d1-5e02-449f-9481-87fea9e9395f'
       name: "v1.5.6"
       application: "mine"
       subsystem: 'home   '
