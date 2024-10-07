@@ -1,0 +1,14 @@
+name: Call Coralogix Inject Version Tags
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/api-secret-test.yml
+    with:
+      cx_version_benchmark_url: 'https://example.com/benchmark'
+    secrets:
+      CX_VERSION_BENCHMARK_API_KEY: 'test'
