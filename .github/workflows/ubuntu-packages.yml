@@ -9,7 +9,6 @@ jobs:
     steps:
     - name: Make fake files 
       run: |
-        sudo apt install firebird-utils -y
         touch epesystem-1.tar.gz
         touch epesystem-2.tar.gz
         touch epesystem-3.tar.gz
