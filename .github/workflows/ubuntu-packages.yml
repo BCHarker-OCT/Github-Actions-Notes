@@ -16,8 +16,7 @@ jobs:
 
     - name: Load Docker File
       run: |
-        whereis gstat
-        latest=$(find . -name "epesystem*.tar.gz" -type f -exec gstat --format="%Y %n" {} \; | sort -n | tail -1 | cut -d' ' -f2-)
+        latest=$(find . -name "epesystem*.tar.gz" -type f -exec stat --format="%Y %n" {} \; | sort -n | tail -1 | cut -d' ' -f2-)
 
         base_name=$(basename "$latest")
         echo $base_name
