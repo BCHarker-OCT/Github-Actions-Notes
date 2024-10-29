@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get tag
-        run: echo "IMAGE_TAG=$(echo hello)" >> "$GITHUB_ENV"
+        run: echo "IMAGE_TAG=$(echo good morning)" >> "$GITHUB_ENV"
 
       - name: Echo tag
         run: |
-             echo "Extracted tag 1: $IMAGE_TAG"
+             echo "Extracted tag 1: ${{ env.IMAGE_TAG }}"
         # env:
         #   IMAGE_TAG: ${{ env.IMAGE_TAG }}
