@@ -1,17 +1,14 @@
 name: Testing Getting Env Vars to Work 
 on: workflow_dispatch
 
-
 jobs:
-    test_job:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Get tag
-            run: |
-              # echo "sanitized_application=$sanitized_application" >> "$GITHUB_OUTPUT"
-              echo "IMAGE_TAG=$(echo hello)" >> "$GITHUB_OUTPUT"
+  test_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get tag
+        run: echo "IMAGE_TAG=$(echo hello)" >> "$GITHUB_ENV"
 
-              echo "Extracted tag 1: ${{ env.IMAGE_TAG }}"
-
-# - name: Verify IMAGE_TAG
-# run: echo "The value of IMAGE_TAG is ${{ env.IMAGE_TAG }}"
+      - name: Echo tag
+        run: echo "Extracted tag 1: $IMAGE_TAG"
+        env:
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
