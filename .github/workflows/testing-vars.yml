@@ -9,6 +9,7 @@ jobs:
         run: echo "IMAGE_TAG=$(echo hello)" >> "$GITHUB_ENV"
 
       - name: Echo tag
-        run: echo "Extracted tag 1: $IMAGE_TAG"
+        run: |
+             echo "Extracted tag 1: $IMAGE_TAG"
         env:
           IMAGE_TAG: ${{ env.IMAGE_TAG }}
