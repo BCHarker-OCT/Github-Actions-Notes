@@ -8,9 +8,9 @@ jobs:
         steps:
           - name: Get tag
             run: |
-              echo "IMAGE_TAG=$(echo hello)" >> "$GITHUB_ENV"
+              echo "IMAGE_TAG=$(echo hello)" >> $GITHUB_ENV
 
-              echo "Extracted tag 1: $IMAGE_TAG"
+              echo "Extracted tag 1: ${{ env.IMAGE_TAG }}"
 
 # - name: Verify IMAGE_TAG
 # run: echo "The value of IMAGE_TAG is ${{ env.IMAGE_TAG }}"
