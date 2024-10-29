@@ -8,7 +8,8 @@ jobs:
         steps:
           - name: Get tag
             run: |
-              echo "IMAGE_TAG=$(echo hello)" >> $GITHUB_ENV
+              # echo "sanitized_application=$sanitized_application" >> "$GITHUB_OUTPUT"
+              echo "IMAGE_TAG=$(echo hello)" >> "$GITHUB_OUTPUT"
 
               echo "Extracted tag 1: ${{ env.IMAGE_TAG }}"
 
