@@ -11,5 +11,5 @@ jobs:
       - name: Echo tag
         run: |
              echo "Extracted tag 1: $IMAGE_TAG"
-        env:
-          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        # env:
+        #   IMAGE_TAG: ${{ env.IMAGE_TAG }}
