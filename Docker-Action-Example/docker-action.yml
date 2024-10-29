@@ -1,0 +1,17 @@
+name: 'Docker Action Example with Giphy' 
+description: 'Posts a Giphy gif to PR Requests'
+
+inputs: 
+  github-token:
+    descrption: 'Github Token'
+    required: true
+  giphy-api-key:
+    description: 'Giphy Api Key'
+    required: true
+
+runs: 
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.github-token }}
+    - ${{ inputs.giphy-api-key }}
