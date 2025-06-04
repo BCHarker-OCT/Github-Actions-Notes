@@ -1,0 +1,71 @@
+name: "CI"
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: write
+  packages: write
+  checks: write
+  pull-requests: write  
+
+jobs:
+#   commit-test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           ref: ${{ github.head_ref || github.ref_name }}
+#           fetch-depth: 0
+
+#       - name: Configure Git
+#         run: |
+#           git config user.name "github-actions[bot]"
+#           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+#       - name: Get branch name
+#         run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
+#       - name: Make a test change
+#         run: |
+#           echo "Test commit at $(date)" >> bot-commit-test.txt
+
+#       - name: Commit and push
+#         run: |
+#           git add bot-commit-test.txt
+#           git commit -m "chore: test commit from GitHub Actions bot" || echo "No changes to commit"
+#           git push origin HEAD:${BRANCH}
+
+  commit-on-main:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+        - name: Checkout Code
+          uses: actions/checkout@v4
+          with:
+            ref: ${{ github.ref }}
+            fetch-depth: 0
+
+        - name: Configure Git
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        - name: Make a test change
+          run: |
+            echo "Test commit at $(date)" >> bot-commit-test.txt
+
+        - name: Commit and push
+          run: |
+            git add bot-commit-test.txt
+            git commit -m "chore: test commit from GitHub Actions bot" || echo "No changes to commit"
+            git push origin HEAD:main
