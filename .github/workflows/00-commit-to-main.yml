@@ -63,5 +63,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           echo "Publishing something..." > publish.txt
           git add publish.txt
-          git commit -m "chore: publishing after merge to main" || echo "No changes to commit"
+          git commit -m "chore: publishing after merge to main [skip ci]" || echo "No changes to commit"
           git push origin main
