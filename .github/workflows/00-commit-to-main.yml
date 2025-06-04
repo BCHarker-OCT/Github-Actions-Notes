@@ -46,26 +46,22 @@ jobs:
 
   commit-on-main:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-        - name: Checkout Code
-          uses: actions/checkout@v4
-          with:
-            ref: ${{ github.ref }}
-            fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-        - name: Configure Git
-          run: |
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Normal steps for PR or push
+        run: echo "✅ Running normal steps (tests, build, etc.)"
 
-        - name: Make a test change
-          run: |
-            echo "Test commit at $(date)" >> bot-commit-test-2.txt
-
-        - name: Commit and push
-          run: |
-            git add bot-commit-test.txt
-            git commit -m "chore: test commit from GitHub Actions bot" || echo "No changes to commit"
-            git push origin HEAD:main
+      - name: Special commit after merge to main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          echo "Publishing something..." > publish.txt
+          git add publish.txt
+          git commit -m "chore: publishing after merge to main [skip ci]" || echo "No changes to commit"
+          git push origin main
