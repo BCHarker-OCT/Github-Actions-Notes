@@ -62,7 +62,7 @@ jobs:
 
         - name: Make a test change
           run: |
-            echo "Test commit at $(date)" >> bot-commit-test.txt
+            echo "Test commit at $(date)" >> bot-commit-test-2.txt
 
         - name: Commit and push
           run: |
