@@ -16,7 +16,6 @@ on:
       container_version:
         description: 'Container version to deploy'
         required: false
-        default: 'v1.0.0'
         type: string
       run_tests:
         description: 'Run tests before deployment'
