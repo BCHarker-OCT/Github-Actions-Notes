@@ -31,6 +31,8 @@ env:
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
+
+    environment: ${{ inputs.environment }}
     
     steps:
       - name: Checkout code
