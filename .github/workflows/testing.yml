@@ -1,0 +1,96 @@
+
+name: Testing Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+          - development
+      container_version:
+        description: 'Container version to deploy'
+        required: false
+        default: 'v1.0.0'
+        type: string
+      run_tests:
+        description: 'Run tests before deployment'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  RUNNING_TAG: 'v1.2.3'  # Dummy value instead of AWS retrieval
+  DOCKER_REGISTRY: 'dummy-registry.example.com'
+  SERVICE_NAME: 'my-dummy-service'
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up dummy environment variables
+        run: |
+          echo "Setting up dummy environment variables..."
+          echo "ENVIRONMENT=${{ inputs.environment }}" >> $GITHUB_ENV
+          echo "CONTAINER_VERSION=${{ inputs.container_version }}" >> $GITHUB_ENV
+          echo "RUN_TESTS=${{ inputs.run_tests }}" >> $GITHUB_ENV
+          
+      - name: Mock container version retrieval
+        id: get-container-version
+        run: |
+          # Simulate getting container version from a registry instead of AWS
+          MOCK_VERSION="v1.2.3"
+          echo "Retrieved mock container version: $MOCK_VERSION"
+          echo "container-version=$MOCK_VERSION" >> $GITHUB_OUTPUT
+          
+      - name: Mock running container check
+        run: |
+          # Simulate checking what's currently running instead of AWS ECS
+          echo "Checking mock running container version..."
+          echo "RUNNING_TAG=v1.2.3" >> $GITHUB_ENV
+          echo "Mock container ${{ env.SERVICE_NAME }} is running version: ${{ env.RUNNING_TAG }}"
+          
+      - name: Run tests (if enabled)
+        if: ${{ inputs.run_tests == true }}
+        run: |
+          echo "Running dummy tests..."
+          echo "✅ Unit tests passed"
+          echo "✅ Integration tests passed"
+          echo "✅ Security scans completed"
+          
+      - name: Compare Running Tag vs Expected
+        run: | 
+          echo "The Running container tag is: ${{ env.RUNNING_TAG }}"
+          if [[ "${{ env.RUNNING_TAG }}" == "${{ inputs.container_version != '' && inputs.container_version || steps.get-container-version.outputs.container-version }}" ]]; then
+            echo "SUCCESS: Expected tag [ ${{ env.RUNNING_TAG }} ] is running in ${{ inputs.environment }}!"
+          elif [[ -z "${{ env.RUNNING_TAG }}" ]]; then 
+            echo "ERROR: Unable to retrieve tag, container not running, or unable to retrieve version."
+            exit 88
+          else 
+            echo "FAILURE: Tag running in environment is not running as expected!"
+            echo "Expected: ${{ inputs.container_version != '' && inputs.container_version || steps.get-container-version.outputs.container-version }}"
+            echo "Actual: ${{ env.RUNNING_TAG }}"
+            exit 99 
+          fi
+          
+      - name: Mock deployment
+        run: |
+          echo "🚀 Deploying to ${{ inputs.environment }} environment..."
+          echo "📦 Container: ${{ env.DOCKER_REGISTRY }}/${{ env.SERVICE_NAME }}:${{ inputs.container_version }}"
+          echo "✅ Deployment completed successfully!"
+          
+      - name: Post-deployment verification
+        run: |
+          echo "🔍 Running post-deployment checks..."
+          echo "✅ Health check passed"
+          echo "✅ Service is responding"
+          echo "✅ All systems operational" 
