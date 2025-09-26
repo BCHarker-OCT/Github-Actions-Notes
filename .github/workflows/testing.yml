@@ -70,7 +70,7 @@ jobs:
       - name: Compare Running Tag vs Expected
         run: | 
           echo "The Running container tag is: ${{ env.RUNNING_TAG }}"
-          if [[ "${{ env.RUNNING_TAG }}" == "${{ inputs.container_version != '' && inputs.container_version || steps.get-container-version.outputs.container-version }}" ]]; then
+          if [[ "${{ env.RUNNING_TAG }}" == "${{ inputs.container_version || steps.get-container-version.outputs.container-version }}" ]]; then
             echo "SUCCESS: Expected tag [ ${{ env.RUNNING_TAG }} ] is running in ${{ inputs.environment }}!"
           elif [[ -z "${{ env.RUNNING_TAG }}" ]]; then 
             echo "ERROR: Unable to retrieve tag, container not running, or unable to retrieve version."
