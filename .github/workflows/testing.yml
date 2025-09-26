@@ -47,7 +47,7 @@ jobs:
         id: get-container-version
         run: |
           # Simulate getting container version from a registry instead of AWS
-          MOCK_VERSION="v1.2.3"
+          MOCK_VERSION="v1.2.4"
           echo "Retrieved mock container version: $MOCK_VERSION"
           echo "container-version=$MOCK_VERSION" >> $GITHUB_OUTPUT
           
